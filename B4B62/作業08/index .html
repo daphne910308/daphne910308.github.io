@@ -2,113 +2,141 @@
 <html lang="zh">
 
 <head>
-	<meta charset="UTF-8">
-	<title>課堂作業08</title>
-	<style>
-		h4 {
-		    color: red;
-		}
+  <meta charset="UTF-8">
+  <title>作業08</title>
+  <style>
+    h4 {
+      color: red;
+    }
 
-		label {
-		      color: red;
-		}
+    label {
+      color: blue;
+    }
 
-		label {
-		       color: blue;
-		}
 
-		input {
-		      color: brown;
-		}
-		div {
-		    color:blue;
-		    margin:5px;
-		}
-	</style>
+
+    input {
+      color: brown;
+    }
+
+    div {
+      color: blue;
+      margin: 5px;
+    }
+    table{
+        width: 40%;
+        border-color: dodgerblue;
+        border-style: solid;
+        border-collapse: collapse;
+
+    }
+    tr{
+        text-align: left;
+        border-color: dodgerblue;
+        border-style: solid;
+    }
+    td{
+        vertical-align: middle;
+        border-color: dodgerblue;
+        border-style: solid;
+
+    }
+    
+    td:nth-child(1){
+      color: brown;
+    }
+  </style>
+
 
 </head>
 
 <body>
-<form id="form01">
-	<label>姓名：</label>
-	<input type="text" name=name01 value="黃貞愉"><br>
-	<label>收件地址：</label>
-	<input type="text" name="address01" value="台北市大同區民權西路172號"><br>
-	<label>電話：</label>
-	<input type="tel" name="tel01" value="0978771276"><br>
-	<label>電子郵件：</label>
-	<input type="email" name="email01" value="daphne19940328@gmail.com"><br>
-	<label>指定配送日期:</label>
-	<input type="date" name="date01"><br>
-	<label>三種水果：（四選一）</label><br>
-	<input type="radio" name="fruit" id="fruit01" value="草莓（一箱）">草莓（一箱）500元<br>
-	<input type="radio" name="fruit" id="fruit02" value="藍莓（一盒）">藍莓（一盒）350元<br>
-	<input type="radio" name="fruit" id="fruit03" value="芭樂（1台斤）">芭樂（一台斤）50元<br>
-    <input type="radio" name="fruit" id="fruit04" value="香蕉（1台斤）">芭樂（一台斤）80元<br>
-</form>
-<br>
-<button onclick="shoppingInfo()"><h4>結帳</h4></button>
-<div id="demo"></div>
-<script>
-	function shoppingInfo() {
-	const x = document.getElementById("form01");
-    var item ="";
-    var price = 0;
-    var text = "<h4>您的購物資訊如下：</h4>";
-    text += "<table>";
-    for (i = 0;i< 5;i++){
-         text += "<td>" + item + "</td>";
-         text += "<td>" + x.elements[i].value + "<td>";
-         text += "</tr>";
+
+  <form id="form01">
+    <label>姓名:</label>
+    <input type="text" name="name01" value="黃貞愉"><br>
+    <label>收件住址：</label>
+    <input type="text" name="address01" value="台北市大同區民權西路172號"><br>
+    <label>電話：</label>
+    <input type="tel" name="tel01" value="0978771276"><br>
+    <label>電子郵件：</label>
+    <input type="email" name="email01" value="daphne19940328@gmail.com"><br>
+    <label>指定送貨日期：</label>
+    <input type="date" name="date01"><br>
+    <label>水果種類：（四選一）</label><br>
+    <input type="radio" name="fruit" id="fruit01" value="草莓（一箱）">草莓（一箱）500<br>
+    <input type="radio" name="fruit" id="fruit02" value="藍莓（一盒）">藍莓（一盒）350<br>
+    <input type="radio" name="fruit" id="fruit03" value="芭樂（1台斤）">芭樂（1台斤）50<br>
+    <input type="radio" name="fruit" id="fruit04" value="香蕉（1台斤）">香蕉（1台斤）80<br>
+  </form>
+  <br>
+  <button onclick="shoppingInfo()">
+    <h4>結帳</h4>
+  </button>
+  <div id="demo"></div>
+  <script>
+    function shoppingInfo() {
+      const x = document.getElementById("form01");
+      var item = "";
+      var price = 0;
+      var text = "<h4>您的購物資訊如下:</h4>";
+      text += "<table>";
+      for (i = 0; i < 5; i++) {
+        text += "<tr>";
+        switch (i) {
+          case 0:
+            item = "姓名: ";
+            break;
+          case 1:
+            item = "收件地址： ";
+            break;
+          case 2:
+            item = "電話: ";
+            break;
+          case 3:
+            item = "電子郵件: ";
+            break;
+          case 4:
+            item = "指定送貨日期: ";
+            break;
+        }
+        text += "<td>" + item + "</td>";
+        text += "<td>" + x.elements[i].value + "</td>";
+        text += "</tr>";
+      }
+      for (i = 5; i <= 8; i++) {
+        if (x.elements[i].checked === true) {
+          switch (i) {
+            case 5:
+              price = 500;
+              break;
+            case 6:
+              price = 350;
+              break;
+            case 7:
+              price = 50;
+              break;
+            case 8:
+              price = 80;
+            break;
+          }
+          text += "<tr>";
+          text += "<td>" + "水果種類：" + "</td>";
+          text += "<td>" + x.elements[i].value + "</td>";
+          text += "</tr>";
+          text += "<tr>";
+          text += "<td>"+"價格合計:" + "</td>";
+          text += "<td>" + price + "元</td>";
+          text += "</tr>";
+
+        }
+
+      }
+
+      text += "</table>";
+      document.getElementById("demo").innerHTML = text;
     }
-    for (i=0; i<5; i++) {
-       switch (i) {
-       case 0:
-            item = "姓名：";
-            break;
-       case 1:
-            item = "收件地址";
-            break;
-       case 2:
-            item = "電話：";
-            break;
-       case 3:
-            item ="電子郵件：";
-            break;
-       case 4:
-            item ="指定送貨時間：";
-            break;
-       }
-    text += item + x.elements[i].value+"<br>";
-}
-    for(i=5;i<=7;i++){
-	    if(x.elements[i].checked===true){
-	       switch(i){
-	          case 5:
-	               price=500;
-	               break;
-	          case 6:
-	                price=350;
-	                break;
-	          case 7:
-	                price=50;
-	                break;
-	       }
-	       text +="水果種類："+x.elements[i].value +"<br>";
-	       text +="價格合計："+ price +"元<br>";
-	       text += "<tr>";
-	       text += "<td>"+"水果種類" +"</td>"
-	       text += "<td>"+x.elements[i].value+</td>;
-	       text += "</>tr>":
-           text += "<td>" + "價格合計:"+ "</td>;
-           text += "<td>" + price + "元</td>"
-           text += "</tr>"
-	    }
-	    text += "</table>";
-	    document.getElementById("demo").innerHTML = text ;
-}
-</script>
+  </script>
 
 </body>
-
 </html>
